@@ -11,20 +11,12 @@
 
 set $mod Mod4
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-#font pango:monospace 8
+# colours
+# client.focused #333333 #666666 #ffffff #333333 #666666
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
+font pango:Inconsolata 9
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -36,11 +28,11 @@ bindsym $mod+Return exec termite
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 
 # alternatively, you can use the cursor keys:
@@ -74,12 +66,6 @@ bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -146,8 +132,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # USER
-
-#exec --no-startup-id polybar example
+exec --no-startup-id polybar -r example 
+exec --no-startup-id xss-lock -- ~/.config/i3/pixelate_lock.sh
 
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
@@ -156,10 +142,11 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +5%; 
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% 
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
-gaps inner 15
+gaps inner 5
 gaps outer 5
 smart_gaps on
 
+bindsym $mod+l exec ~/.config/i3/pixelate_lock.sh
 
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
